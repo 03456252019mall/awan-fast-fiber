@@ -1,0 +1,13 @@
+{
+  "name": "Awan Fast Fiber",
+  "short_name": "Awan Fiber",
+  "description": "Fast, reliable fiber internet for Chak 481 JB and nearby villages.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A1930",
+  "theme_color": "#0A1930",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

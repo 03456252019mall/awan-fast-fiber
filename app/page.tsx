@@ -2,18 +2,34 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { BUSINESS, whatsappLink } from "@/lib/constants";
 import PackageCard from "@/components/PackageCard";
+import BannerCarousel from "@/components/BannerCarousel";
 
 export default async function HomePage() {
   const supabase = createClient();
 
-  const [{ data: packages }, { data: areas }, { data: faqs }] = await Promise.all([
+  const today = new Date().toISOString().slice(0, 10);
+  const [{ data: packages }, { data: areas }, { data: faqs }, { data: banners }, { data: settings }] = await Promise.all([
     supabase.from("packages").select("*").eq("is_active", true).order("sort_order").limit(4),
     supabase.from("service_areas").select("name").eq("is_active", true),
-    supabase.from("faqs").select("*").eq("is_active", true).order("sort_order").limit(4)
+    supabase.from("faqs").select("*").eq("is_active", true).order("sort_order").limit(4),
+    supabase
+      .from("banners")
+      .select("*")
+      .eq("is_active", true)
+      .or(`start_date.is.null,start_date.lte.${today}`)
+      .or(`end_date.is.null,end_date.gte.${today}`)
+      .order("sort_order"),
+    supabase.from("website_settings").select("hero_heading, hero_subheading").eq("id", 1).single()
   ]);
+
+  const heroHeading = settings?.hero_heading || "Fast, reliable fiber internet — brought to your village.";
+  const heroSubheading =
+    settings?.hero_subheading ||
+    `${BUSINESS.name} connects homes across our service areas with dependable, affordable internet backed by real local support.`;
 
   return (
     <div>
+      <BannerCarousel banners={banners ?? []} />
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-white/10 fiber-lines">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
@@ -22,11 +38,10 @@ export default async function HomePage() {
               Serving Chak 481 JB &amp; nearby villages
             </span>
             <h1 className="mt-5 font-display text-4xl font-bold leading-tight text-white md:text-5xl">
-              Fast, reliable fiber internet — brought to your village.
+              {heroHeading}
             </h1>
             <p className="mt-5 max-w-lg text-white/65">
-              {BUSINESS.name} connects homes across our service areas with dependable, affordable
-              internet backed by real local support.
+              {heroSubheading}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/new-connection" className="rounded-full bg-amber px-6 py-3 text-sm font-semibold text-navy hover:brightness-110">

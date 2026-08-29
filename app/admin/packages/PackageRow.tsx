@@ -31,6 +31,13 @@ export default function PackageRow({ pkg }: { pkg: Pkg }) {
     router.refresh();
   }
 
+  async function remove() {
+    if (!confirm(`Delete the ${pkg.speed_mbps} Mbps package? This cannot be undone.`)) return;
+    const supabase = createClient();
+    await supabase.from("packages").delete().eq("id", pkg.id);
+    router.refresh();
+  }
+
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-4">
       <div>
@@ -52,6 +59,9 @@ export default function PackageRow({ pkg }: { pkg: Pkg }) {
         </button>
         <button onClick={toggleActive} className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70 hover:text-white">
           {pkg.is_active ? "Deactivate" : "Activate"}
+        </button>
+        <button onClick={remove} className="rounded-full border border-red-500/30 px-3 py-1.5 text-xs text-red-400 hover:bg-red-500/10">
+          Delete
         </button>
       </div>
     </div>

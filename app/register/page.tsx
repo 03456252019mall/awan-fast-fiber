@@ -59,6 +59,7 @@ export default function RegisterPage() {
       id: signUpData.user.id,
       customer_id: normalizedId,
       full_name: form.full_name,
+      email: form.email,
       mobile: form.mobile,
       address: form.address,
       service_area_id: form.service_area_id || null

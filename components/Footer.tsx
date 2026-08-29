@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { BUSINESS } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import Logo from "./Logo";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -10,7 +11,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-12">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <p className="font-display text-lg font-bold text-white">Awan Fast Fiber</p>
+            <Logo size={32} />
             <p className="mt-3 text-sm leading-relaxed text-white/60">{t("footer_operates")}</p>
           </div>
           <div>

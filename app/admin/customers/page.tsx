@@ -18,6 +18,7 @@ export default async function AdminCustomersPage() {
             <tr className="border-b border-white/10 bg-white/[0.03] text-left text-white/50">
               <th className="px-4 py-3">Customer ID</th>
               <th className="px-4 py-3">Name</th>
+              <th className="px-4 py-3">Email</th>
               <th className="px-4 py-3">Mobile</th>
               <th className="px-4 py-3">Area</th>
               <th className="px-4 py-3">Status</th>
@@ -29,6 +30,7 @@ export default async function AdminCustomersPage() {
               <tr key={c.id} className="border-b border-white/5">
                 <td className="px-4 py-3 font-mono text-cyan">{c.customer_id}</td>
                 <td className="px-4 py-3 text-white">{c.full_name}</td>
+                <td className="px-4 py-3 text-white/70">{c.email ?? "—"}</td>
                 <td className="px-4 py-3 text-white/70">{c.mobile}</td>
                 <td className="px-4 py-3 text-white/70">{c.service_areas?.name ?? "—"}</td>
                 <td className="px-4 py-3">

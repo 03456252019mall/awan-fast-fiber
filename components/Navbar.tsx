@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import LanguageToggle from "./LanguageToggle";
+import Logo from "./Logo";
 
 const LINKS = [
   { href: "/", key: "nav_home" },
@@ -20,13 +21,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-navy/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold text-white">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-cyan to-skyblue text-navy">
-            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
-              <path d="M12 2 2 7l10 5 10-5-10-5Zm0 7L2 14l10 5 10-5-10-5Zm0 7L2 21l10 5v-2.5L4.5 20 12 16.4V19Z" />
-            </svg>
-          </span>
-          Awan Fast Fiber
+        <Link href="/">
+          <Logo size={34} />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">

@@ -93,15 +93,45 @@ export default async function HomePage() {
 
       {/* WHY CHOOSE US */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="font-display text-2xl font-bold text-white md:text-3xl">Why choose Awan Fast Fiber</h2>
+        <span className="text-xs font-semibold uppercase tracking-widest text-cyan">Why Awan Fast Fiber</span>
+        <h2 className="mt-2 font-display text-2xl font-bold text-white md:text-3xl">Built by the community, for the community</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {[
-            { title: "Real local support", desc: "Family-run and based in Chak 481 JB — we know our service areas personally." },
-            { title: "Fiber-optic backbone", desc: "Our main fiber backbone, deployed November 2025, means stronger and more reliable connections." },
-            { title: "Fair, transparent pricing", desc: "Straightforward monthly packages with no hidden charges." }
+            {
+              title: "Real local support",
+              desc: "Family-run and based in Chak 481 JB — we know our service areas personally.",
+              color: "from-cyan/20 to-cyan/5 border-cyan/30",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M12 21c-4.5-3-8-6.5-8-10.5A8 8 0 0 1 12 3a8 8 0 0 1 8 7.5c0 4-3.5 7.5-8 10.5Z" />
+                  <circle cx="12" cy="10.5" r="2.5" />
+                </svg>
+              )
+            },
+            {
+              title: "Fiber-optic backbone",
+              desc: "Our main fiber backbone, deployed November 2025, means stronger and more reliable connections.",
+              color: "from-skyblue/20 to-skyblue/5 border-skyblue/30",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M4 12h4l2-4 4 8 2-4h4" />
+                </svg>
+              )
+            },
+            {
+              title: "Fair, transparent pricing",
+              desc: "Straightforward monthly packages with no hidden charges.",
+              color: "from-amber/20 to-amber/5 border-amber/30",
+              icon: (
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+              )
+            }
           ].map((f) => (
-            <div key={f.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <p className="font-display text-lg font-semibold text-white">{f.title}</p>
+            <div key={f.title} className={`rounded-2xl border bg-gradient-to-b p-6 ${f.color}`}>
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-cyan">{f.icon}</div>
+              <p className="mt-4 font-display text-lg font-semibold text-white">{f.title}</p>
               <p className="mt-2 text-sm text-white/60">{f.desc}</p>
             </div>
           ))}
@@ -109,10 +139,14 @@ export default async function HomePage() {
       </section>
 
       {/* PACKAGES */}
-      <section className="border-y border-white/10 bg-white/[0.02] py-20">
-        <div className="mx-auto max-w-6xl px-5">
+      <section className="relative border-y border-white/10 bg-navy-deep py-20">
+        <div className="pointer-events-none absolute inset-0 opacity-40 fiber-lines" />
+        <div className="relative mx-auto max-w-6xl px-5">
           <div className="flex items-end justify-between">
-            <h2 className="font-display text-2xl font-bold text-white md:text-3xl">Internet packages</h2>
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-amber">Pricing</span>
+              <h2 className="mt-2 font-display text-2xl font-bold text-white md:text-3xl">Internet packages</h2>
+            </div>
             <Link href="/packages" className="text-sm font-medium text-cyan hover:underline">View all →</Link>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -125,12 +159,17 @@ export default async function HomePage() {
 
       {/* COVERAGE */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="font-display text-2xl font-bold text-white md:text-3xl">Where we serve</h2>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <span className="text-xs font-semibold uppercase tracking-widest text-skyblue">Coverage</span>
+        <h2 className="mt-2 font-display text-2xl font-bold text-white md:text-3xl">Where we serve</h2>
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
           {(areas ?? []).map((a) => (
-            <span key={a.name} className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/70">
-              {a.name}
-            </span>
+            <div key={a.name} className="flex flex-col items-center gap-2 rounded-xl border border-skyblue/20 bg-skyblue/5 px-3 py-4 text-center">
+              <svg viewBox="0 0 24 24" className="h-5 w-5 text-skyblue" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21Z" />
+                <circle cx="12" cy="9.5" r="2.3" />
+              </svg>
+              <span className="text-sm text-white/70">{a.name}</span>
+            </div>
           ))}
         </div>
         <Link href="/coverage" className="mt-6 inline-block text-sm font-medium text-cyan hover:underline">
@@ -139,18 +178,21 @@ export default async function HomePage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="border-y border-white/10 bg-white/[0.02] py-20">
+      <section className="border-y border-white/10 bg-gradient-to-br from-navy-light via-navy to-navy-deep py-20">
         <div className="mx-auto max-w-6xl px-5">
-          <h2 className="font-display text-2xl font-bold text-white md:text-3xl">How it works</h2>
+          <span className="text-xs font-semibold uppercase tracking-widest text-cyan">Getting Started</span>
+          <h2 className="mt-2 font-display text-2xl font-bold text-white md:text-3xl">How it works</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {[
               ["Choose a package", "Pick the speed that fits your home."],
               ["Submit your request", "Fill the new connection form — we'll reach out to confirm."],
               ["Get connected", "Our technician installs your fiber connection and ONT."]
             ].map(([title, desc], i) => (
-              <div key={title} className="rounded-2xl border border-white/10 bg-navy p-6">
-                <p className="font-mono text-sm text-cyan">Step {i + 1}</p>
-                <p className="mt-2 font-display text-lg font-semibold text-white">{title}</p>
+              <div key={title} className="relative rounded-2xl border border-white/10 bg-navy/60 p-6 backdrop-blur">
+                <span className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-cyan font-mono text-sm font-bold text-navy">
+                  {i + 1}
+                </span>
+                <p className="mt-3 font-display text-lg font-semibold text-white">{title}</p>
                 <p className="mt-2 text-sm text-white/60">{desc}</p>
               </div>
             ))}
@@ -160,12 +202,16 @@ export default async function HomePage() {
 
       {/* FAQ TEASER */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="font-display text-2xl font-bold text-white md:text-3xl">Frequently asked questions</h2>
+        <span className="text-xs font-semibold uppercase tracking-widest text-amber">Questions</span>
+        <h2 className="mt-2 font-display text-2xl font-bold text-white md:text-3xl">Frequently asked questions</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {(faqs ?? []).map((f) => (
-            <div key={f.id} className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-              <p className="font-semibold text-white">{f.question}</p>
-              <p className="mt-2 text-sm text-white/60">{f.answer}</p>
+            <div key={f.id} className="flex gap-3 rounded-xl border border-amber/15 bg-amber/[0.04] p-5">
+              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber/20 text-xs font-bold text-amber">?</span>
+              <div>
+                <p className="font-semibold text-white">{f.question}</p>
+                <p className="mt-2 text-sm text-white/60">{f.answer}</p>
+              </div>
             </div>
           ))}
         </div>

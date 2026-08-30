@@ -20,7 +20,7 @@ export default async function AboutPage() {
       <h1 className="font-display text-3xl font-bold text-white md:text-4xl">About Awan Fast Fiber</h1>
 
       <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6 leading-relaxed text-white/70">
-        {(settings?.about_text ?? "").split("\n").filter(Boolean).map((p, i) => (
+        {(settings?.about_text ?? "").split("\n").filter(Boolean).map((p: string, i: number) => (
           <p key={i} className="mb-4 last:mb-0">{p}</p>
         ))}
       </div>
